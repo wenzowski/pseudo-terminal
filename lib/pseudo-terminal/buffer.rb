@@ -3,12 +3,13 @@ require 'pseudo-terminal/string'
 class PseudoTerminal::Buffer
   attr_accessor :mask, :raw, :lines, :segment
 
-  def initialize
+  def initialize str_ready, mask=[]
     @raw = ''
     @segment = ''
     @lines = []
     @buff_a = []
-    @mask = []
+    @mask = mask
+    @ready = str_ready.to_s
   end
 
   def << str
@@ -25,15 +26,16 @@ class PseudoTerminal::Buffer
     b.each {|l| @lines << l}
   end
 
-  def lines_arr_from buffer
+  def lines_from buffer
     buffer.lines.to_a.each {|l| begin l.chomp! end while l.end_with_any? "\r\n".chars }
   end
 
   def lines_from_raw buffer
-    arr = lines_arr_from buffer
-    arr = merge_line(arr) if !@segment.empty?
-    @segment << arr.pop if truncated
-    arr.each {|line| line.strip_ansi_escape_sequences!}
+    lines = lines_from buffer
+    lines = merge_line(lines) if !@segment.empty?
+    @segment << lines.pop if truncated
+    lines.each {|line| line.strip_ansi_escape_sequences!}
+    lines.each_with_index {|line, key| lines.delete_at key if line.match /^#{@ready}/}
   end
 
   def new_line

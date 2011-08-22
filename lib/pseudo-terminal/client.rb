@@ -5,12 +5,12 @@ module PseudoTerminal::Client
   attr_accessor :r, :w, :b, :timeout
 
   def initialize opt={}
-    opt[:ready] ||= '>'
+    opt[:ready] ||= '> '
     opt[:sh] ||= "env PS1='#{opt[:ready]}' TERM=dumb sh -i"
     opt[:timeout] ||= 1
     @timeout = opt[:timeout]
     @r, @w, @pid = PTY.spawn opt[:sh]
-    @b = PseudoTerminal::Buffer.new
+    @b = PseudoTerminal::Buffer.new opt[:ready]
     read
     @b.mask << @b.lines.pop while @b.lines.empty? == false
   end
