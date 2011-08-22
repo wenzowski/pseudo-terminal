@@ -12,10 +12,14 @@ module PseudoTerminal::Client
     @r, @w, @pid = PTY.spawn opt[:sh]
     @b = PseudoTerminal::Buffer.new opt[:ready]
     read
-    @b.mask << @b.lines.pop while @b.lines.empty? == false
+    @b.masks << @b.lines.pop while @b.lines.empty? == false
   end
 
   def << command, &block
+    put command, &block
+  end
+
+  def put command, &block
     @w.puts command
     read &block
   end

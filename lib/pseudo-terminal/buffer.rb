@@ -1,14 +1,14 @@
 require 'pseudo-terminal/string'
 
 class PseudoTerminal::Buffer
-  attr_accessor :mask, :raw, :lines, :segment
+  attr_accessor :masks, :raw, :lines, :segment
 
-  def initialize str_ready, mask=[]
+  def initialize str_ready, masks=[]
     @raw = ''
     @segment = ''
     @lines = []
     @buff_a = []
-    @mask = mask
+    @masks = masks
     @ready = str_ready.to_s
   end
 
@@ -36,6 +36,10 @@ class PseudoTerminal::Buffer
     @segment << lines.pop if truncated
     lines.each {|line| line.strip_ansi_escape_sequences!}
     lines.each_with_index {|line, key| lines.delete_at key if line.match /^#{@ready}/}
+    @masks.each do |mask|
+      lines.each_with_index {|line, key| lines.delete_at key if line.match /^#{mask}/}
+    end
+    lines
   end
 
   def new_line

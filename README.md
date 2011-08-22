@@ -1,7 +1,8 @@
 Pseudo Terminal
-====================================================================
+===============
 
-This library wraps PTY to ease use of PTY on unix-based operating systems.
+This library wraps PTY to ease use of pseudo terminals on unix-based operating systems.
+
 
 Sample Workflow
 ---------------
@@ -10,7 +11,8 @@ Create a new pseudo terminal, write a command, process result, and close the pro
 
     require 'pseudo-terminal'
     pt = PseudoTerminal.new           # Create a new pseudo terminal.
-    (pt << 'pwd').each {|l| puts l}   # Write command & process each resulting line as it becomes available.
+    (pt << 'pwd').each {|l| puts l}   # Write command & print result.
+    pt.put('pwd') {|l| puts l}        # Write command & print each line when it appears on the pipe.
     pt.close                          # Close pseudo terminal and halt process.
 
 

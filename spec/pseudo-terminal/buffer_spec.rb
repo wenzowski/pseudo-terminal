@@ -15,11 +15,19 @@ describe PseudoTerminal::Buffer do
     end
 
     it 'is empty' do
-      (@b << '').should == []
+      (@b << '').should be_kind_of(Array)
+      (@b << '').should be_empty
     end
 
     it 'is ready' do
-      (@b << @ready).should == []
+      (@b << @ready).should be_empty
+    end
+
+    it 'has masked lines' do
+      @b.masks = ['error line 1', 'error line 2']
+      masks_str = ''
+      @b.masks.each {|mask| masks_str << "#{mask}\r\n"}
+      (@b << masks_str).should == []
     end
 
     it 'contains newline (\r\n)' do
@@ -27,8 +35,8 @@ describe PseudoTerminal::Buffer do
     end
 
     it 'is truncated' do
-      (@b << '1').should == []
-      (@b << '2').should == []
+      (@b << '1').should be_empty
+      (@b << '2').should be_empty
       (@b << "3\r\n").should == ['123']
     end
 

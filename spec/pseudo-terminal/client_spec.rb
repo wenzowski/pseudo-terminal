@@ -38,6 +38,8 @@ describe PseudoTerminal do
       (@t << 'pwd').first.should == Dir.pwd
     end
 
-    it 'has a command written to it while a block is passed to it'
+    it 'has a command written to it while a block is passed to it' do
+      @t.put('pwd') {|line| line.should == Dir.pwd}
+    end
   end
 end
