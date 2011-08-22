@@ -1,19 +1,14 @@
 require 'pseudo-terminal/string'
 
 class PseudoTerminal::Buffer
+  attr_accessor :mask, :raw, :lines, :segment
+
   def initialize
-    @lines = []
     @raw = ''
-    @buff_a = []
     @segment = ''
-  end
-
-  def raw
-    @raw
-  end
-
-  def lines
-    @lines
+    @lines = []
+    @buff_a = []
+    @mask = []
   end
 
   def << str

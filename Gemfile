@@ -7,7 +7,6 @@ group :development do
   gem "rspec", ">= 2.6.0"
   gem "simplecov", "~> 0.4.2"
   gem "rr",    "~> 1.0.2"
-  gem "fakefs"
   gem "parka", ">= 0.6.2"
 end
 

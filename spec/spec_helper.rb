@@ -8,7 +8,6 @@ end
 
 require "rspec"
 require "rr"
-require "fakefs/safe"
 
 def prepare_command(klass)
   command = klass.new
