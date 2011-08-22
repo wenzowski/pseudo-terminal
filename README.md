@@ -10,8 +10,7 @@ Create a new pseudo terminal, write a command, process result, and close the pro
 
     require 'pseudo-terminal'
     pt = PseudoTerminal.new           # Create a new pseudo terminal.
-    (pt << 'pwd').each {|l| puts l}   # Write command & process each resulting
-                                      # line as it becomes available.
+    (pt << 'pwd').each {|l| puts l}   # Write command & process each resulting line as it becomes available.
     pt.close                          # Close pseudo terminal and halt process.
 
 

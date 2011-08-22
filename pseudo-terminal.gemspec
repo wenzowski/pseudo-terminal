@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.version = PseudoTerminal::VERSION
 
   gem.author      = "Alexander Wenzowski"
-  gem.email       = "alex@ent.io"
+  gem.email       = "alexander@wenzowski.com"
   gem.homepage    = "http://ent.io/"
   gem.summary     = "Pseudo terminal built on PTY."
   gem.description = "Pseudo terminal library to ease interaction with PTY."
