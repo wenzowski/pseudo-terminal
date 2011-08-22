@@ -11,7 +11,7 @@ Create a new pseudo terminal, write a command, process result, and close the pro
 
     require 'pseudo-terminal'
     pt = PseudoTerminal.new           # Create a new pseudo terminal.
-    (pt << 'pwd').each {|l| puts l}   # Write command & print result.
+    puts pt << 'pwd'                  # Write command & print result.
     pt.put('pwd') {|l| puts l}        # Write command & print each line when it appears on the pipe.
     pt.close                          # Close pseudo terminal and halt process.
 
