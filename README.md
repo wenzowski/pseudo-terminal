@@ -1,8 +1,9 @@
 Pseudo Terminal
 ===============
 
-This library wraps PTY to ease use of pseudo terminals on unix-based operating systems.
+[![Travis CI Build Status](http://travis-ci.org/wenzowski/pseudo-terminal.png)](http://travis-ci.org/wenzowski/pseudo-terminal)
 
+This library wraps PTY to ease use of pseudo terminals on unix-based operating systems.
 
 Sample Workflow
 ---------------
